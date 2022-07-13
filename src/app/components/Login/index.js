@@ -4,6 +4,8 @@ import { withRouter } from "react-router";
 import swal from 'sweetalert';
 import { AuthContext } from '../../services/Auth';
 import { auth } from '../../services/firebase';
+import "../styles/styles.css";
+import logo from '../imgs/Logo.png';
 
 
 const Login = ({ history }) => {
@@ -39,20 +41,23 @@ const Login = ({ history }) => {
                     <span className="bg-black text-white font-bold text-xl p-4"> Nahuat App</span>
                 </div>
 
-                <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-                    <p className="text-center text-3xl">Bienvenido.</p>
-                    <form className="flex flex-col pt-3 md:pt-8">
-                        <div className="flex flex-col pt-4">
+                <div className="app">
+                    <p className="title">Bienvenido.</p>
+                    <img src={logo} alt="Logo" width="200" height="200" />
+                    <form className="login-form">
+                        <div className="input-container">
                             <label className="text-lg">Correo</label>
                             <input onChange={(ev) => { setUser(ev.target.value) }} type="email" id="email" placeholder="tucorreo@ufg.edu.sv" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
 
-                        <div className="flex flex-col pt-4">
+                        <div className="input-container">
                             <label className="text-lg">Contraseña</label>
                             <input type="password" onChange={(ev) => { setPass(ev.target.value) }} id="password" placeholder="Password" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
                     </form>
-                    <button onClick={() => { Enviar({ email: user, password: pass }) }} className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" > Ingresar</button>
+                    <div className= '' >
+                        <button onClick={() => { Enviar({ email: user, password: pass }) }} className="button-container" > Ingresar</button>
+                    </div>
                     <div className="text-center pt-12 pb-12">
                     </div>
                 </div>
