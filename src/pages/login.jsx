@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import logo from './imgs/Logo.png';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css'
-import './App.css';
-import "./styles.css";
-import "./pages/dashboard"
-import {Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import logo from '../imgs/Logo.png';
+import '../App.css';
+import "../styles.css";
+import "./dashboard"
+
 
 function App() {
 
@@ -85,7 +85,7 @@ function App() {
     <img src={logo} alt="Logo" width="200" height="200" />
     <div className="login-form">
       <div className="title">Iniciar Sección</div>
-      {isSubmitted ? <div>Usuario accesado <div><Link to="/dashboard">Dashboard</Link></div></div> : renderForm}
+      {isSubmitted ? <Navigate to="/dashboard" /> : renderForm}
     </div>
   </div>
   );
