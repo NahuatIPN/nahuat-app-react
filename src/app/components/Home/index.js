@@ -1,19 +1,39 @@
 import _ from "lodash";
-import { signOut } from '@firebase/auth';
 import React, { useState, useEffect, useContext } from 'react';
-import { auth } from '../../services/firebase';
 import Navbar from "../navbar/navbar";
-import logo from '../imgs/Logo.png';
+import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
 
 
-const Home = () =>{
+const Home = () => {
 
-    return(<>
-      <Navbar/>
-      <br></br>
-      <br></br>
-      <div align="center"><img src={logo} alt="Logo" width="500" height="500" /></div>
-    </>)
+  return (<>
+    <Navbar />
+    <div className="container my-5">
+      <div className="my-5">
+        <button className="btn btn-success">Agregar palabra</button>
+      </div>
+      <div className="table-responsive">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Palabra</th>
+              <th scope="col">Significado</th>
+              <th scope="col">Accion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td><PencilAltIcon className="icons"/> <TrashIcon className="icons text-danger" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </>)
 }
 
 export default Home 
