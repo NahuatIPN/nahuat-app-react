@@ -15,3 +15,8 @@ code {
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+.icons {
+  height: 35px;
+  cursor: pointer;
+}

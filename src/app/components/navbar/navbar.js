@@ -14,14 +14,8 @@ export default function Navbar(){
         }
       }
     return <nav className="nav">
-        <p className="site-title">Nahuat app</p>
+        <p className="site-title px-5 pt-2">Nahuatl admin</p>
         <ul>
-            <li>
-                <a className="btn btn-primary" href="/database">Base de datos</a>
-            </li>
-            <li>
-                <a className="btn btn-primary" href="/home">Agregar palabra</a>
-            </li>
             <li>
             <button className="btn btn-primary" onClick={()=>signOutUser()}> Cerrar session</button>
             </li>
