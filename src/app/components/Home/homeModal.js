@@ -69,7 +69,7 @@ const HomeModal = ({ palabra, handleClose, show }) => {
                     <label htmlFor="significado" className="fw-bold">Audio</label>
                     <input type="file" onChange={(ev) => { setAudio(ev.target.files[0]) }} className="form-control" id="audio" />
                         <small id="emailHelp" className="form-text text-muted">Audio de la palabra.</small>
-                </div> : <div className="my-4 text-center"> <h2>Audio</h2> <button className="btn btn-success" onClick={()=>{setPlaying(!playing); play(playing)}}> {playing ? <PlayIcon className="icons"/> : <PauseIcon className="icons"/> } </button> </div>}
+                </div> : <div className="my-4 text-center"> <h2>Audio</h2> <button className="btn btn-success" onClick={()=>{setPlaying(!playing); play(playing)}}> {!playing ? <PlayIcon className="icons"/> : <PauseIcon className="icons"/> } </button> </div>}
                 
             </Modal.Body>
             <Modal.Footer>
@@ -77,7 +77,7 @@ const HomeModal = ({ palabra, handleClose, show }) => {
                     Cerrar
                 </Button>
                 <Button variant="primary" onClick={()=>{
-                    setPalabraDB(palabranew, significado, traduccion,imagen, audio)
+                   if(palabra === null) setPalabraDB(palabranew, significado, traduccion,imagen, audio)
                     handleClose()
                 }}>
                     {palabra !== null ? 'Modificar' : 'Agregar'}
