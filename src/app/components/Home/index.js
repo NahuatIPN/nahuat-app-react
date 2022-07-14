@@ -17,7 +17,6 @@ const Home = () => {
     async function getData (){
       const palabras = await getPalabras()
       setData(palabras)
-      console.log(palabras)
     }
     getData()
 }, [show]);
