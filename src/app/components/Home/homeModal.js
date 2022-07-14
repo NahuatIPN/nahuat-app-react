@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { getAudio, setPalabraDB, getImagen } from "../../services/palabras";
+import { PlayIcon, PauseIcon, TrashIcon } from '@heroicons/react/solid'
 
 const HomeModal = ({ palabra, handleClose, show }) => {
     const [palabranew , setPalabra] = useState("")
@@ -10,6 +11,7 @@ const HomeModal = ({ palabra, handleClose, show }) => {
     const [traduccion , setTraduccion] = useState("")
     const [imagen, setImagen] = useState(null)
     const [audio, setAudio] = useState(null)
+    const [playing , setPlaying] = useState(false);
 
     useEffect(()=>{
         if(palabra !== null){
@@ -27,6 +29,15 @@ const HomeModal = ({ palabra, handleClose, show }) => {
             setTraduccion('')
         }
     }, [palabra])
+
+    const play = (playing)=>{
+        const newAudio = new Audio(audio);
+        if(playing){
+            newAudio.play();
+        }else{
+            newAudio.pause();
+        }
+    }
 
     return (<>
         <Modal show={show} onHide={handleClose} size='md' centered>
@@ -53,12 +64,12 @@ const HomeModal = ({ palabra, handleClose, show }) => {
                     <label htmlFor="significado" className="fw-bold">Imagen</label>
                     <input type="file" onChange={(ev) => { setImagen(ev.target.files[0]) }} className="form-control" id="img" />
                         <small id="emailHelp" className="form-text text-muted">Imagen de la escritura de la palabra.</small>
-                </div> : <div className="text-center"> <img src={imagen} /> <button className="btn btn-danger">Eliminar</button> </div>}
-                <div className="form-group my-3">
+                </div> : <div className="text-center"> <img src={imagen} className="w-50" /> <button className="btn btn-danger"><TrashIcon className="icons"/></button> </div>}
+                {audio === null ? <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Audio</label>
                     <input type="file" onChange={(ev) => { setAudio(ev.target.files[0]) }} className="form-control" id="audio" />
                         <small id="emailHelp" className="form-text text-muted">Audio de la palabra.</small>
-                </div>
+                </div> : <div className="my-4 text-center"> <h2>Audio</h2> <button className="btn btn-success" onClick={()=>{setPlaying(!playing); play(playing)}}> {playing ? <PlayIcon className="icons"/> : <PauseIcon className="icons"/> } </button> </div>}
                 
             </Modal.Body>
             <Modal.Footer>
