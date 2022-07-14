@@ -1,6 +1,6 @@
 import "./styles_navbar.css";
 import { signOut } from '@firebase/auth';
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import { auth } from '../../services/firebase';
 
 export default function Navbar(){

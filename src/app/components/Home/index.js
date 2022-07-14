@@ -2,9 +2,13 @@ import _ from "lodash";
 import React, { useState, useEffect, useContext } from 'react';
 import Navbar from "../navbar/navbar";
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
+import HomeModal from "./homeModal";
 
 
 const Home = () => {
+  const [show, setShow] = useState(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (<>
     <Navbar />
@@ -27,12 +31,14 @@ const Home = () => {
               <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td><PencilAltIcon className="icons"/> <TrashIcon className="icons text-danger" /></td>
+              <td><PencilAltIcon className="icons" onClick={()=>handleShow()}/> <TrashIcon className="icons text-danger" /></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+    <HomeModal palabra={null} handleClose={handleClose} show={show}/>
   </>)
 }
 
