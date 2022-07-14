@@ -37,22 +37,18 @@ const Login = ({ history }) => {
 
             <div className="w-full md:w-1/2 flex flex-col">
 
-                <div className="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24">
-                    <span className="bg-black text-white font-bold text-xl p-4"> Nahuat App</span>
-                </div>
-
                 <div className="app">
-                    <p className="title">Bienvenido.</p>
+                    <p className="title">Nahuatl Admin</p>
                     <img src={logo} alt="Logo" width="200" height="200" />
                     <form className="login-form">
                         <div className="input-container">
                             <label className="text-lg">Correo</label>
-                            <input onChange={(ev) => { setUser(ev.target.value) }} type="email" id="email" placeholder="tucorreo@ufg.edu.sv" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                            <input onChange={(ev) => { setUser(ev.target.value) }} type="email" id="email" placeholder="tucorreo@ufg.edu.sv" className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
 
                         <div className="input-container">
                             <label className="text-lg">Contraseña</label>
-                            <input type="password" onChange={(ev) => { setPass(ev.target.value) }} id="password" placeholder="Password" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                            <input type="password" onChange={(ev) => { setPass(ev.target.value) }} id="password" placeholder="Password" className="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
                     </form>
                     <div className= '' >
