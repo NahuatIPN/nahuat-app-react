@@ -2,7 +2,7 @@ import { collection, getDocs, getDoc, doc, setDoc } from "@firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
 
-const setPalabraDB = async (palabra, significado, traduccion, imagen, audio) => {
+const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sinonimo, abrev, nahuat) => {
     try {
         const newDate = new Date();
         const storageRefImagen = ref(storage, `/imagenes/${newDate.getTime() + '-' + imagen.name}`);
@@ -18,6 +18,9 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio) => 
             significado: significado,
             imagen: newDate.getTime() + '-' + imagen.name,
             audio: newDate.getTime() + '-' + audio.name,
+            sinonimo: sinonimo,
+            abrev: abrev,
+            nahuat: nahuat,
             estado: 'activo',
         })
 

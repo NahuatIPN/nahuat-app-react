@@ -51,7 +51,7 @@ const Home = () => {
       </div>
     </div>
 
-    <HomeModal palabra={palabra} handleClose={handleClose} show={show}/>
+    <HomeModal palabra={palabra} data={data} handleClose={handleClose} show={show}/>
   </>)
 }
 
