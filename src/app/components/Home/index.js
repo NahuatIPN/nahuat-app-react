@@ -1,13 +1,14 @@
 import _ from "lodash";
 import React, { useState, useEffect, useContext } from 'react';
 import Navbar from "../navbar/navbar";
-import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
+import { PencilAltIcon} from '@heroicons/react/solid'
 import HomeModal from "./homeModal";
-import { getPalabras } from "../../services/palabras";
+import { deletePalabraDB, getPalabras } from "../../services/palabras";
 
 
 const Home = () => {
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(0);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [palabra, setPalabra] = useState(null);
@@ -43,7 +44,7 @@ const Home = () => {
                <th scope="row">{index + 1}</th>
                <td>{palabra.palabra}</td>
                <td>{palabra.traduccion}</td>
-               <td><PencilAltIcon className="icons" onClick={()=>{handleShow(); setPalabra(palabra)}}/> <TrashIcon className="icons text-danger" /></td>
+               <td><PencilAltIcon className="icons" onClick={()=>{handleShow(); setPalabra(palabra)}}/> </td>
              </tr>)
             })}
           </tbody>

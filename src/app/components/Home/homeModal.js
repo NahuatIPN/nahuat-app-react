@@ -2,8 +2,9 @@ import _ from "lodash";
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { getAudio, setPalabraDB, getImagen } from "../../services/palabras";
+import { getAudio, setPalabraDB, getImagen, deletePalabraDB } from "../../services/palabras";
 import { PlayIcon, PauseIcon, TrashIcon } from '@heroicons/react/solid'
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid'
 import Select from 'react-select';
 
 const HomeModal = ({ palabra, data, handleClose, show }) => {
@@ -12,11 +13,14 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
     const [traduccion, setTraduccion] = useState("")
     const [imagen, setImagen] = useState(null)
     const [audio, setAudio] = useState(null)
+    const [imagenURL, setImagenURL] = useState(null)
+    const [audioURL, setAudioURL] = useState(null)
     const [sinonimo, setSinonimo] = useState([])
     const [playing, setPlaying] = useState(false);
     const [newOptions, setNewOptions] = useState([]);
     const [abrev, setAbrev] = useState('');
     const [nahuat, setNahuat] = useState('');
+    const [mod, setMod] = useState(0);
 
     useEffect(() => {
         if (palabra !== null) {
@@ -27,13 +31,14 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             setAbrev(palabra.abrev)
             setNahuat(palabra.nahuat)
             let arr = []
-            const filterData = _.filter(data, (i)=> i.palabra !== palabra.palabra)
+            const filterData = _.filter(data, (i)=> i.palabra != palabra.palabra)
             _.map(filterData, (i) => {
                 arr.push({ value: i.palabra, label: i.palabra })
             })
             setNewOptions(arr)
-            if (palabra.audio) getAudio(palabra.audio).then((url) => (setAudio(url)))
-            if (palabra.imagen) getImagen(palabra.imagen).then((url) => (setImagen(url)))
+            setMod(1)
+            if (palabra.audio) getAudio(palabra.audio).then((url) => {setAudioURL(url); setAudio(palabra.audio)})
+            if (palabra.imagen) getImagen(palabra.imagen).then((url) => {setImagenURL(url); setImagen(palabra.imagen);})
         }
         else {
             setAudio(null);
@@ -45,21 +50,24 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             setSinonimo([])
             setNahuat('')
             let arr = []
+            setMod(0)
             _.map(data, (i) => {
                 arr.push({ value: i.palabra, label: i.palabra })
             })
             setNewOptions(arr)
+            console.log(data)
         }
-    }, [palabra])
+    }, [palabra, data])
 
     const play = (playing) => {
-        const newAudio = new Audio(audio);
+        const newAudio = new Audio(audioURL);
         if (playing) {
             newAudio.play();
         } else {
             newAudio.pause();
         }
     }
+
 
     return (<>
         <Modal show={show} onHide={handleClose} size='md' centered>
@@ -70,12 +78,12 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
                 <div className="form-group">
                     <label htmlFor="palabra" className="fw-bold">Palabra</label>
                     <input type="text" onChange={(ev) => { setPalabra(ev.target.value) }} value={palabranew} className="form-control" id="palabra" aria-describedby="emailHelp" placeholder="Ingresa la palabra" />
-                    <small id="emailHelp" className="form-text text-muted">Palabra para agregar al diccionario.</small>
+                    <small id="emailHelp" className="form-text text-muted">Palabra para agregar en Nahuat al diccionario.</small>
                 </div>
                 <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Traduccion</label>
                     <input type="text" onChange={(ev) => { setTraduccion(ev.target.value) }} value={traduccion} className="form-control" id="traduccion" aria-describedby="emailHelp" placeholder="Ingresa la traduccion" />
-                    <small id="emailHelp" className="form-text text-muted">Traduccion a agregar al diccionario.</small>
+                    <small id="emailHelp" className="form-text text-muted">Traduccion a agregar en Español al diccionario.</small>
                 </div>
                 <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Significado</label>
@@ -92,12 +100,14 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
                     <input type="text" onChange={(ev) => { setNahuat(ev.target.value) }} value={nahuat} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa el Nahuatlismo o Hispanismo" />
                     <small id="emailHelp" className="form-text text-muted">Nahuatlismo o Hispanismo agregar al diccionario.</small>
                 </div>
-                {imagen !== null && palabra !== null ? <div className="text-center"> <img src={imagen} className="w-50" /> <button className="btn btn-danger"><TrashIcon className="icons" /></button> </div> : <div className="form-group my-3">
+                {imagenURL !== null && palabra !== null ? <div className="text-center"> <img src={imagenURL} className="w-50" /> <button className="btn btn-danger" onClick={()=>{setImagen(null); mod === 4 ? setMod(5) : setMod(3)}}><TrashIcon className="icons" /></button> </div> : <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Imagen</label>
                     <input type="file" onChange={(ev) => { setImagen(ev.target.files[0]) }} className="form-control" id="img" />
                     <small id="emailHelp" className="form-text text-muted">Imagen de la escritura de la palabra.</small>
                 </div>}
-                {audio !== null && palabra !== null ? <div className="my-4 text-center"> <h2>Audio</h2> <button className="btn btn-success" onClick={() => { setPlaying(!playing); play(playing) }}> {!playing ? <PlayIcon className="icons" /> : <PauseIcon className="icons" />} </button> </div> :
+                {audio !== null && palabra !== null ? <div className="my-4 text-center"> <h2>Audio</h2> 
+                <button className="btn btn-success" onClick={() => { setPlaying(!playing); play(playing) }}> {!playing ? <PlayIcon className="icons" /> : <PauseIcon className="icons" />} </button>
+                <button className="btn btn-danger" onClick={()=>{setAudio(null); mod === 3 ? setMod(5) : setMod(4) }}><TrashIcon className="icons" /></button> </div> :
                     <div className="form-group my-3">
                         <label htmlFor="significado" className="fw-bold">Audio</label>
                         <input type="file" onChange={(ev) => { setAudio(ev.target.files[0]) }} className="form-control" id="audio" />
@@ -120,11 +130,12 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
 
             </Modal.Body>
             <Modal.Footer>
+            {palabra ? palabra.estado === 'Activo' ? <EyeIcon onClick={()=>{deletePalabraDB(palabra , 1); handleClose()}} className="icons text-success" /> : <EyeOffIcon onClick={()=>{deletePalabraDB(palabra , 0); handleClose() }} className="icons text-danger" /> : '' }
                 <Button variant="secondary" onClick={handleClose}>
                     Cerrar
                 </Button>
                 <Button variant="primary" onClick={() => {
-                    if (palabra === null) setPalabraDB(palabranew, significado, traduccion, imagen, audio, sinonimo, nahuat, abrev)
+                    setPalabraDB(palabranew, significado, traduccion, imagen, audio, sinonimo, abrev, nahuat, mod)
                     handleClose()
                     
                 }}>
