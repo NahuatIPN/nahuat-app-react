@@ -3,7 +3,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
 import swal from 'sweetalert';
 
-const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sinonimo, abrev, nahuat, mod) => {
+const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sinonimo, abrev, nahuat, hispa, mex, cambio, mod) => {
     try {
         const newDate = new Date();
 
@@ -24,6 +24,9 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,
+                    hispa: hispa,
+                    mex: mex,
+                    cambio: cambio,
                     estado: 'Activo',
                 })
                 break;
@@ -37,6 +40,9 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,
+                    hispa: hispa,
+                    mex: mex,
+                    cambio: cambio,
                     estado: 'Activo',
                 })
                 break;
@@ -55,6 +61,9 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,
+                    hispa: hispa,
+                    mex: mex,
+                    cambio: cambio,
                     estado: 'Activo',
                 })
                 break;
@@ -71,6 +80,9 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,
+                    hispa: hispa,
+                    mex: mex,
+                    cambio: cambio,
                     estado: 'Activo',
                 })
                 break;
@@ -91,6 +103,9 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,
+                    hispa: hispa,
+                    mex: mex,
+                    cambio: cambio,
                     estado: 'Activo',
                 })
                 break;

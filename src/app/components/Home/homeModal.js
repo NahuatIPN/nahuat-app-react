@@ -20,6 +20,9 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
     const [newOptions, setNewOptions] = useState([]);
     const [abrev, setAbrev] = useState('');
     const [nahuat, setNahuat] = useState('');
+    const [hispa, setHispa] = useState('');
+    const [cambio, setCambio] = useState('');
+    const [mex, setMex] = useState('');
     const [mod, setMod] = useState(0);
 
     useEffect(() => {
@@ -30,6 +33,9 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             setSinonimo(palabra.sinonimo)
             setAbrev(palabra.abrev)
             setNahuat(palabra.nahuat)
+            setHispa(palabra.hispa)
+            setCambio(palabra.cambio)
+            setMex(palabra.mex)
             let arr = []
             const filterData = _.filter(data, (i)=> i.palabra != palabra.palabra)
             _.map(filterData, (i) => {
@@ -49,6 +55,9 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             setAbrev('')
             setSinonimo([])
             setNahuat('')
+            setMex('')
+            setHispa('')
+            setCambio('')
             let arr = []
             setMod(0)
             _.map(data, (i) => {
@@ -96,8 +105,23 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
                     <small id="emailHelp" className="form-text text-muted">Abrev a agregar al diccionario.</small>
                 </div>
                 <div className="form-group my-3">
-                    <label htmlFor="significado" className="fw-bold">Nahuatlismo - Hispanismo</label>
+                    <label htmlFor="significado" className="fw-bold">Nahuatlismo</label>
                     <input type="text" onChange={(ev) => { setNahuat(ev.target.value) }} value={nahuat} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa el Nahuatlismo o Hispanismo" />
+                    <small id="emailHelp" className="form-text text-muted">Nahuatlismo o Hispanismo agregar al diccionario.</small>
+                </div>
+                <div className="form-group my-3">
+                    <label htmlFor="significado" className="fw-bold">Hispanismo</label>
+                    <input type="text" onChange={(ev) => { setHispa(ev.target.value) }} value={hispa} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa el Nahuatlismo o Hispanismo" />
+                    <small id="emailHelp" className="form-text text-muted">Nahuatlismo o Hispanismo agregar al diccionario.</small>
+                </div>
+                <div className="form-group my-3">
+                    <label htmlFor="significado" className="fw-bold">Cambio Linguistico</label>
+                    <input type="text" onChange={(ev) => { setCambio(ev.target.value) }} value={cambio} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa el Nahuatlismo o Hispanismo" />
+                    <small id="emailHelp" className="form-text text-muted">Nahuatlismo o Hispanismo agregar al diccionario.</small>
+                </div>
+                <div className="form-group my-3">
+                    <label htmlFor="significado" className="fw-bold">Mexicanismo</label>
+                    <input type="text" onChange={(ev) => { setMex(ev.target.value) }} value={mex} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa el Nahuatlismo o Hispanismo" />
                     <small id="emailHelp" className="form-text text-muted">Nahuatlismo o Hispanismo agregar al diccionario.</small>
                 </div>
                 {imagenURL !== null && palabra !== null ? <div className="text-center"> <img src={imagenURL} className="w-50" /> <button className="btn btn-danger" onClick={()=>{setImagen(null); mod === 4 ? setMod(5) : setMod(3)}}><TrashIcon className="icons" /></button> </div> : <div className="form-group my-3">
@@ -135,7 +159,7 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
                     Cerrar
                 </Button>
                 <Button variant="primary" onClick={() => {
-                    setPalabraDB(palabranew, significado, traduccion, imagen, audio, sinonimo, abrev, nahuat, mod)
+                    setPalabraDB(palabranew, significado, traduccion, imagen, audio, sinonimo, abrev, nahuat, hispa, mex, cambio, mod)
                     handleClose()
                     
                 }}>
