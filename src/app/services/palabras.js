@@ -6,21 +6,13 @@ import swal from 'sweetalert';
 const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sinonimo, abrev, nahuat, hispa, mex, cambio, mod) => {
     try {
         const newDate = new Date();
-
+        console.log(mod)
         switch (mod) {
             case 0:
-                const storageRefImagen = ref(storage, `/imagenes/${newDate.getTime() + '-' + imagen.name}`);
-                const storageRefAudio = ref(storage, `/audios/${newDate.getTime() + '-' + audio.name}`);
-                // progress can be paused and resumed. It also exposes progress updates.
-                // Receives the storage reference and the file to upload.
-                uploadBytesResumable(storageRefImagen, imagen);
-                uploadBytesResumable(storageRefAudio, audio);
                 await setDoc(doc(db, 'Palabras', traduccion), {
                     palabra: palabra,
                     traduccion: traduccion,
                     significado: significado,
-                    imagen: newDate.getTime() + '-' + imagen.name,
-                    audio: newDate.getTime() + '-' + audio.name,
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,

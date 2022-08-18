@@ -43,8 +43,12 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             })
             setNewOptions(arr)
             setMod(1)
-            if (palabra.audio) getAudio(palabra.audio).then((url) => {setAudioURL(url); setAudio(palabra.audio)})
-            if (palabra.imagen) getImagen(palabra.imagen).then((url) => {setImagenURL(url); setImagen(palabra.imagen);})
+            if (palabra.audio){
+                getAudio(palabra.audio).then((url) => {setAudioURL(url); setAudio(palabra.audio)})
+            }else{ 
+                setAudioURL(null); setAudio(null) 
+            }
+            if (palabra.imagen) {getImagen(palabra.imagen).then((url) => {setImagenURL(url); setImagen(palabra.imagen);})} else{setImagenURL(null); setImagen(null);}
         }
         else {
             setAudio(null);
@@ -97,7 +101,7 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
                 <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Significado</label>
                     <input type="text" onChange={(ev) => { setSignificado(ev.target.value) }} value={significado} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa el significado" />
-                    <small id="emailHelp" className="form-text text-muted">Significado a agregar al diccionario.</small>
+                    <small id="emailHelp" className="form-text text-muted">Cosmovision Nahuat al diccionario.</small>
                 </div>
                 <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Abrev.</label>
@@ -124,9 +128,9 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
                     <input type="text" onChange={(ev) => { setMex(ev.target.value) }} value={mex} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa el Nahuatlismo o Hispanismo" />
                     <small id="emailHelp" className="form-text text-muted">Nahuatlismo o Hispanismo agregar al diccionario.</small>
                 </div>
-                {imagenURL !== null && palabra !== null ? <div className="text-center"> <img src={imagenURL} className="w-50" /> <button className="btn btn-danger" onClick={()=>{setImagen(null); mod === 4 ? setMod(5) : setMod(3)}}><TrashIcon className="icons" /></button> </div> : <div className="form-group my-3">
+                {imagenURL !== null && palabra !== null ? <div className="text-center"> <img src={imagenURL} className="w-50" /> <button className="btn btn-danger" onClick={()=>{setImagen(null); setImagenURL(null); mod === 4 ? setMod(5) : setMod(3)}}><TrashIcon className="icons" /></button> </div> : <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Imagen</label>
-                    <input type="file" onChange={(ev) => { setImagen(ev.target.files[0]) }} className="form-control" id="img" />
+                    <input type="file" onChange={(ev) => { setImagen(ev.target.files[0]); mod === 4 ? setMod(5) : setMod(3) }} className="form-control" id="img" />
                     <small id="emailHelp" className="form-text text-muted">Imagen de la escritura de la palabra.</small>
                 </div>}
                 {audio !== null && palabra !== null ? <div className="my-4 text-center"> <h2>Audio</h2> 
@@ -134,7 +138,7 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
                 <button className="btn btn-danger" onClick={()=>{setAudio(null); mod === 3 ? setMod(5) : setMod(4) }}><TrashIcon className="icons" /></button> </div> :
                     <div className="form-group my-3">
                         <label htmlFor="significado" className="fw-bold">Audio</label>
-                        <input type="file" onChange={(ev) => { setAudio(ev.target.files[0]) }} className="form-control" id="audio" />
+                        <input type="file" onChange={(ev) => { setAudio(ev.target.files[0]); mod === 3 ? setMod(5) : setMod(4) }} className="form-control" id="audio" />
                         <small id="emailHelp" className="form-text text-muted">Audio de la palabra.</small>
                     </div>}
 
