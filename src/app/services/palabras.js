@@ -27,8 +27,8 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                     palabra: palabra,
                     traduccion: traduccion,
                     significado: significado,
-                    imagen: imagen.name,
-                    audio: audio.name,
+                    imagen: imagen,
+                    audio: audio,
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,
@@ -40,16 +40,18 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                 break;
 
             case 3:
-                const storageRefImagenMod = ref(storage, `/imagenes/${newDate.getTime() + '-' + imagen.name}`);
+                
+            if(imagen){    
+            const storageRefImagenMod = ref(storage, `/imagenes/${newDate.getTime() + '-' + imagen.name}`);
                 // progress can be paused and resumed. It also exposes progress updates.
                 // Receives the storage reference and the file to upload.
-                uploadBytesResumable(storageRefImagenMod, imagen);
+                uploadBytesResumable(storageRefImagenMod, imagen);}
                 await setDoc(doc(db, 'Palabras', traduccion), {
                     palabra: palabra,
                     traduccion: traduccion,
                     significado: significado,
-                    imagen: newDate.getTime() + '-' + imagen.name,
-                    audio: audio.name,
+                    imagen: imagen ? newDate.getTime() + '-' + imagen.name : null,
+                    audio: audio,
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,
@@ -61,14 +63,15 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                 break;
 
             case 4:
+                if(audio){
                 const storageRefAudioMod = ref(storage, `/audios/${newDate.getTime() + '-' + audio.name}`);
-                uploadBytesResumable(storageRefAudioMod, audio);
+                uploadBytesResumable(storageRefAudioMod, audio);}
                 await setDoc(doc(db, 'Palabras', traduccion), {
                     palabra: palabra,
                     traduccion: traduccion,
                     significado: significado,
-                    imagen: imagen.name,
-                    audio: newDate.getTime() + '-' + audio.name,
+                    imagen: imagen,
+                    audio: audio ? newDate.getTime() + '-' + audio.name : null,
                     sinonimo: sinonimo,
                     abrev: abrev,
                     nahuat: nahuat,

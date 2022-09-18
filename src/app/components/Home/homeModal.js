@@ -48,7 +48,8 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             }else{ 
                 setAudioURL(null); setAudio(null) 
             }
-            if (palabra.imagen) {getImagen(palabra.imagen).then((url) => {setImagenURL(url); setImagen(palabra.imagen);})} else{setImagenURL(null); setImagen(null);}
+            if (palabra.imagen) {getImagen(palabra.imagen).then((url) => {setImagenURL(url); setImagen(palabra.imagen);})} 
+            else{setImagenURL(null); setImagen(null);}
         }
         else {
             setAudio(null);
