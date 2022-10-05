@@ -7,7 +7,7 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
     try {
         const newDate = new Date();
         const docSnap = await getDoc(doc(db, 'Palabras/' + traduccion));
-        if (!docSnap.exists()) {
+        if (!docSnap.exists() && mod === 0) {
             switch (mod) {
                 case 0:
                     await setDoc(doc(db, 'Palabras', traduccion), {
@@ -16,6 +16,8 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                         significado: significado,
                         sinonimo: sinonimo,
                         abrev: abrev,
+                        imagen: imagen ? imagen : null,
+                        audio: audio ? audio : null,
                         nahuat: nahuat,
                         hispa: hispa,
                         mex: mex,
