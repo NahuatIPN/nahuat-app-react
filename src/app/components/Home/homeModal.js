@@ -89,15 +89,18 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
                 <Modal.Title>{palabra !== null ? 'Modificar palabra' : 'Agregar Palabra'}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+            <div className="form-group my-3">
+                    <label htmlFor="significado" className="fw-bold">Traduccion</label>
+                    {
+                        mod === 0 ? <input type="text" className="form-control" id="significado" value={significado} onChange={(e) => setSignificado(e.target.value)} /> :
+                        <input type="text" onChange={(ev) => { setTraduccion(ev.target.value) }} value={traduccion} className="form-control" id="traduccion" aria-describedby="emailHelp" placeholder="Ingresa la traduccion" disabled  />
+                    }
+                    <small id="emailHelp" className="form-text text-muted">Traduccion a agregar en Español al diccionario.</small>
+                </div>
                 <div className="form-group">
                     <label htmlFor="palabra" className="fw-bold">Palabra</label>
                     <input type="text" onChange={(ev) => { setPalabra(ev.target.value) }} value={palabranew} className="form-control" id="palabra" aria-describedby="emailHelp" placeholder="Ingresa la palabra" />
                     <small id="emailHelp" className="form-text text-muted">Palabra para agregar en Nahuat al diccionario.</small>
-                </div>
-                <div className="form-group my-3">
-                    <label htmlFor="significado" className="fw-bold">Traduccion</label>
-                    <input type="text" onChange={(ev) => { setTraduccion(ev.target.value) }} value={traduccion} className="form-control" id="traduccion" aria-describedby="emailHelp" placeholder="Ingresa la traduccion" />
-                    <small id="emailHelp" className="form-text text-muted">Traduccion a agregar en Español al diccionario.</small>
                 </div>
                 <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Significado</label>

@@ -6,109 +6,114 @@ import swal from 'sweetalert';
 const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sinonimo, abrev, nahuat, hispa, mex, cambio, mod) => {
     try {
         const newDate = new Date();
-        console.log(mod)
-        switch (mod) {
-            case 0:
-                await setDoc(doc(db, 'Palabras', traduccion), {
-                    palabra: palabra,
-                    traduccion: traduccion,
-                    significado: significado,
-                    sinonimo: sinonimo,
-                    abrev: abrev,
-                    nahuat: nahuat,
-                    hispa: hispa,
-                    mex: mex,
-                    cambio: cambio,
-                    estado: 'Activo',
-                })
-                break;
-            case 1:
-                await setDoc(doc(db, 'Palabras', traduccion), {
-                    palabra: palabra,
-                    traduccion: traduccion,
-                    significado: significado,
-                    imagen: imagen,
-                    audio: audio,
-                    sinonimo: sinonimo,
-                    abrev: abrev,
-                    nahuat: nahuat,
-                    hispa: hispa,
-                    mex: mex,
-                    cambio: cambio,
-                    estado: 'Activo',
-                })
-                break;
+        const docSnap = await getDoc(doc(db, 'Palabras/' + traduccion));
+        if (!docSnap.exists()) {
+            switch (mod) {
+                case 0:
+                    await setDoc(doc(db, 'Palabras', traduccion), {
+                        palabra: palabra,
+                        traduccion: traduccion,
+                        significado: significado,
+                        sinonimo: sinonimo,
+                        abrev: abrev,
+                        nahuat: nahuat,
+                        hispa: hispa,
+                        mex: mex,
+                        cambio: cambio,
+                        estado: 'Activo',
+                    })
+                    break;
+                case 1:
+                    await setDoc(doc(db, 'Palabras', traduccion), {
+                        palabra: palabra,
+                        traduccion: traduccion,
+                        significado: significado,
+                        imagen: imagen,
+                        audio: audio,
+                        sinonimo: sinonimo,
+                        abrev: abrev,
+                        nahuat: nahuat,
+                        hispa: hispa,
+                        mex: mex,
+                        cambio: cambio,
+                        estado: 'Activo',
+                    })
+                    break;
 
-            case 3:
-                
-            if(imagen){    
-            const storageRefImagenMod = ref(storage, `/imagenes/${newDate.getTime() + '-' + imagen.name}`);
-                // progress can be paused and resumed. It also exposes progress updates.
-                // Receives the storage reference and the file to upload.
-                uploadBytesResumable(storageRefImagenMod, imagen);}
-                await setDoc(doc(db, 'Palabras', traduccion), {
-                    palabra: palabra,
-                    traduccion: traduccion,
-                    significado: significado,
-                    imagen: imagen ? newDate.getTime() + '-' + imagen.name : null,
-                    audio: audio,
-                    sinonimo: sinonimo,
-                    abrev: abrev,
-                    nahuat: nahuat,
-                    hispa: hispa,
-                    mex: mex,
-                    cambio: cambio,
-                    estado: 'Activo',
-                })
-                break;
+                case 3:
 
-            case 4:
-                if(audio){
-                const storageRefAudioMod = ref(storage, `/audios/${newDate.getTime() + '-' + audio.name}`);
-                uploadBytesResumable(storageRefAudioMod, audio);}
-                await setDoc(doc(db, 'Palabras', traduccion), {
-                    palabra: palabra,
-                    traduccion: traduccion,
-                    significado: significado,
-                    imagen: imagen,
-                    audio: audio ? newDate.getTime() + '-' + audio.name : null,
-                    sinonimo: sinonimo,
-                    abrev: abrev,
-                    nahuat: nahuat,
-                    hispa: hispa,
-                    mex: mex,
-                    cambio: cambio,
-                    estado: 'Activo',
-                })
-                break;
+                    if (imagen) {
+                        const storageRefImagenMod = ref(storage, `/imagenes/${newDate.getTime() + '-' + imagen.name}`);
+                        // progress can be paused and resumed. It also exposes progress updates.
+                        // Receives the storage reference and the file to upload.
+                        uploadBytesResumable(storageRefImagenMod, imagen);
+                    }
+                    await setDoc(doc(db, 'Palabras', traduccion), {
+                        palabra: palabra,
+                        traduccion: traduccion,
+                        significado: significado,
+                        imagen: imagen ? newDate.getTime() + '-' + imagen.name : null,
+                        audio: audio,
+                        sinonimo: sinonimo,
+                        abrev: abrev,
+                        nahuat: nahuat,
+                        hispa: hispa,
+                        mex: mex,
+                        cambio: cambio,
+                        estado: 'Activo',
+                    })
+                    break;
 
-            case 5:
-                const storageRefImagenMod2 = ref(storage, `/imagenes/${newDate.getTime() + '-' + imagen.name}`);
-                const storageRefAudioMod2 = ref(storage, `/audios/${newDate.getTime() + '-' + audio.name}`);
-                // progress can be paused and resumed. It also exposes progress updates.
-                // Receives the storage reference and the file to upload.
-                uploadBytesResumable(storageRefImagenMod2, imagen);
-                uploadBytesResumable(storageRefAudioMod2, audio);
-                await setDoc(doc(db, 'Palabras', traduccion), {
-                    palabra: palabra,
-                    traduccion: traduccion,
-                    significado: significado,
-                    imagen: newDate.getTime() + '-' + imagen.name,
-                    audio: newDate.getTime() + '-' + audio.name,
-                    sinonimo: sinonimo,
-                    abrev: abrev,
-                    nahuat: nahuat,
-                    hispa: hispa,
-                    mex: mex,
-                    cambio: cambio,
-                    estado: 'Activo',
-                })
-                break;
+                case 4:
+                    if (audio) {
+                        const storageRefAudioMod = ref(storage, `/audios/${newDate.getTime() + '-' + audio.name}`);
+                        uploadBytesResumable(storageRefAudioMod, audio);
+                    }
+                    await setDoc(doc(db, 'Palabras', traduccion), {
+                        palabra: palabra,
+                        traduccion: traduccion,
+                        significado: significado,
+                        imagen: imagen,
+                        audio: audio ? newDate.getTime() + '-' + audio.name : null,
+                        sinonimo: sinonimo,
+                        abrev: abrev,
+                        nahuat: nahuat,
+                        hispa: hispa,
+                        mex: mex,
+                        cambio: cambio,
+                        estado: 'Activo',
+                    })
+                    break;
+
+                case 5:
+                    const storageRefImagenMod2 = ref(storage, `/imagenes/${newDate.getTime() + '-' + imagen.name}`);
+                    const storageRefAudioMod2 = ref(storage, `/audios/${newDate.getTime() + '-' + audio.name}`);
+                    // progress can be paused and resumed. It also exposes progress updates.
+                    // Receives the storage reference and the file to upload.
+                    uploadBytesResumable(storageRefImagenMod2, imagen);
+                    uploadBytesResumable(storageRefAudioMod2, audio);
+                    await setDoc(doc(db, 'Palabras', traduccion), {
+                        palabra: palabra,
+                        traduccion: traduccion,
+                        significado: significado,
+                        imagen: newDate.getTime() + '-' + imagen.name,
+                        audio: newDate.getTime() + '-' + audio.name,
+                        sinonimo: sinonimo,
+                        abrev: abrev,
+                        nahuat: nahuat,
+                        hispa: hispa,
+                        mex: mex,
+                        cambio: cambio,
+                        estado: 'Activo',
+                    })
+                    break;
+            }
+        } else {
+            swal("Error", "La palabra ya existe", "error");
         }
-
     } catch (e) {
-        console.error("Error adding document: ", e);
-    }
+    swal("Error", "No se ha podido agregar la palabra", "error")
+}
 }
 
 const getPalabras = async () => {
