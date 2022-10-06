@@ -26,7 +26,6 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                         estado: 'Activo',
                     })
                 } else {
-                    console.log(mod)
                     swal("Error", "La palabra ya existe", "error");
                 }
                     break;
@@ -115,6 +114,8 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                     })
                     break;
             }
+
+            swal("Modificado", "Modificado con exito", "success");
         
     } catch (e) {
     swal("Error", "No se ha podido agregar la palabra", "error")
