@@ -7,9 +7,10 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
     try {
         const newDate = new Date();
         const docSnap = await getDoc(doc(db, 'Palabras/' + traduccion));
-        if (!docSnap.exists() && mod === 0) {
+        console.log(mod)
             switch (mod) {
                 case 0:
+                if (!docSnap.exists()) {
                     await setDoc(doc(db, 'Palabras', traduccion), {
                         palabra: palabra,
                         traduccion: traduccion,
@@ -24,6 +25,10 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                         cambio: cambio,
                         estado: 'Activo',
                     })
+                } else {
+                    console.log(mod)
+                    swal("Error", "La palabra ya existe", "error");
+                }
                     break;
                 case 1:
                     await setDoc(doc(db, 'Palabras', traduccion), {
@@ -110,9 +115,7 @@ const setPalabraDB = async (palabra, significado, traduccion, imagen, audio, sin
                     })
                     break;
             }
-        } else {
-            swal("Error", "La palabra ya existe", "error");
-        }
+        
     } catch (e) {
     swal("Error", "No se ha podido agregar la palabra", "error")
 }
