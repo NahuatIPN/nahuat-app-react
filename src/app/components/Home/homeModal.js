@@ -92,7 +92,7 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             <div className="form-group my-3">
                     <label htmlFor="significado" className="fw-bold">Traduccion</label>
                     {
-                        mod === 0 ? <input type="text" className="form-control" id="significado" value={significado} onChange={(e) => setSignificado(e.target.value)} /> :
+                        mod === 0 ? <input type="text" onChange={(ev) => { setTraduccion(ev.target.value) }} value={traduccion} className="form-control" id="traduccion" aria-describedby="emailHelp" placeholder="Ingresa la traduccion" /> :
                         <input type="text" onChange={(ev) => { setTraduccion(ev.target.value) }} value={traduccion} className="form-control" id="traduccion" aria-describedby="emailHelp" placeholder="Ingresa la traduccion" disabled  />
                     }
                     <small id="emailHelp" className="form-text text-muted">Traduccion a agregar en Español al diccionario.</small>
