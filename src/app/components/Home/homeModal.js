@@ -90,25 +90,25 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             </Modal.Header>
             <Modal.Body>
             <div className="form-group my-3">
-                    <label htmlFor="significado" className="fw-bold">Traduccion</label>
-                    {
-                        mod === 0 ? <input type="text" onChange={(ev) => { setTraduccion(ev.target.value) }} value={traduccion} className="form-control" id="traduccion" aria-describedby="emailHelp" placeholder="Ingresa la traduccion" /> :
-                        <input type="text" onChange={(ev) => { setTraduccion(ev.target.value) }} value={traduccion} className="form-control" id="traduccion" aria-describedby="emailHelp" placeholder="Ingresa la traduccion" disabled  />
-                    }
+                    <label htmlFor="significado" className="fw-bold">Palabra Español</label>
+                    
+                        <input type="text" onChange={(ev) => { setTraduccion(ev.target.value) }} value={traduccion} className="form-control" id="traduccion" aria-describedby="emailHelp" placeholder="Ingresa la traduccion" /> 
+
+                    
                     <small id="emailHelp" className="form-text text-muted">Traduccion a agregar en Español al diccionario.</small>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="palabra" className="fw-bold">Palabra</label>
+                    <label htmlFor="palabra" className="fw-bold">Palabra Nahuat</label>
                     <input type="text" onChange={(ev) => { setPalabra(ev.target.value) }} value={palabranew} className="form-control" id="palabra" aria-describedby="emailHelp" placeholder="Ingresa la palabra" />
                     <small id="emailHelp" className="form-text text-muted">Palabra para agregar en Nahuat al diccionario.</small>
                 </div>
                 <div className="form-group my-3">
-                    <label htmlFor="significado" className="fw-bold">Significado</label>
+                    <label htmlFor="significado" className="fw-bold">Significado o Cosmovision</label>
                     <input type="text" onChange={(ev) => { setSignificado(ev.target.value) }} value={significado} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa el significado" />
                     <small id="emailHelp" className="form-text text-muted">Cosmovision Nahuat al diccionario.</small>
                 </div>
                 <div className="form-group my-3">
-                    <label htmlFor="significado" className="fw-bold">Abrev.</label>
+                    <label htmlFor="significado" className="fw-bold">Abrev - Clasificacion Gramatical</label>
                     <input type="text" onChange={(ev) => { setAbrev(ev.target.value) }} value={abrev} className="form-control" id="significado" aria-describedby="emailHelp" placeholder="Ingresa la abrev" />
                     <small id="emailHelp" className="form-text text-muted">Abrev a agregar al diccionario.</small>
                 </div>

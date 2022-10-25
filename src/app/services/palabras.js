@@ -1,4 +1,4 @@
-import { collection, getDocs, getDoc, doc, setDoc, writeBatch } from "@firebase/firestore";
+import { collection, getDocs, getDoc, doc, setDoc, writeBatch, deleteDoc } from "@firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
 import swal from 'sweetalert';
@@ -183,10 +183,27 @@ const deletePalabraDB = (palabra, mod) => {
     }
 }
 
+
+const deletePalabraStorage = async(palabra) => { 
+
+    swal({ title: 'Estas seguro de eliminar esta palabra " ' + palabra.traduccion + ' "', icon: 'warning', buttons: ["Cancelar", 'Aceptar'], closeOnClickOutside: false, closeOnEsc: false })
+                .then(async (value) => {
+                    if (value) {
+                        await deleteDoc(doc(db, 'Palabras', palabra.traduccion));
+                        swal({ title: 'Palabra eliminada correctamente', icon: 'success' }).then(() => {
+                            document.location.reload();
+                        })
+                        
+                    }
+                });
+
+}
+
 export {
     setPalabraDB,
     getPalabras,
     getAudio,
     getImagen,
-    deletePalabraDB
+    deletePalabraDB,
+    deletePalabraStorage
 }

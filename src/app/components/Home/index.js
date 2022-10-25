@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React, { useState, useEffect, useContext } from 'react';
 import Navbar from "../navbar/navbar";
-import { PencilAltIcon} from '@heroicons/react/solid'
+import { PencilAltIcon, TrashIcon} from '@heroicons/react/solid'
 import HomeModal from "./homeModal";
-import { deletePalabraDB, getPalabras } from "../../services/palabras";
+import { deletePalabraStorage, getPalabras } from "../../services/palabras";
 
 
 const Home = () => {
@@ -13,6 +13,7 @@ const Home = () => {
   const handleShow = () => setShow(true);
   const [palabra, setPalabra] = useState(null);
   const [data, setData] = useState(null);
+  
 
   useEffect(()=>{
     async function getData (){
@@ -45,6 +46,7 @@ const Home = () => {
                <td>{palabra.palabra}</td>
                <td>{palabra.traduccion}</td>
                <td><PencilAltIcon className="icons" onClick={()=>{handleShow(); setPalabra(palabra)}}/> </td>
+               <td><TrashIcon className="icons text-danger" onClick={()=>{ deletePalabraStorage(palabra) }}/> </td>
              </tr>)
             })}
           </tbody>
