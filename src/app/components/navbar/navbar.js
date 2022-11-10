@@ -17,7 +17,7 @@ export default function Navbar(){
         <p className="site-title px-5 pt-2">Nahuat admin</p>
         <ul>
             <li>
-            <button className="btn btn-primary" onClick={()=>signOutUser()}> Cerrar session</button>
+            <button className="btn btn-primary" onClick={()=>signOutUser()}> Cerrar sesión</button>
             </li>
         </ul>
     </nav>
