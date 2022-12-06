@@ -37,7 +37,7 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
             setCambio(palabra.cambio)
             setMex(palabra.mex)
             let arr = []
-            const filterData = _.filter(data, (i)=> i.palabra != palabra.palabra)
+            const filterData = _.filter(data, (i)=> i.palabra !== palabra.palabra)
             _.map(filterData, (i) => {
                 arr.push({ value: i.palabra, label: i.palabra })
             })
