@@ -13,6 +13,7 @@ const HomeModal = ({ palabra, handleClose, show }) => {
 
     useEffect(()=>{
         if(palabra !== null){
+            console.log(palabra);
             setPalabra(palabra.palabra)
             setSignificado(palabra.significado)
             setTraduccion(palabra.traduccion)
