@@ -1,23 +1,24 @@
 import _ from "lodash";
 import React, { useState, useEffect, useContext } from 'react';
 import Navbar from "../navbar/navbar";
-import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
+import { PencilAltIcon, TrashIcon} from '@heroicons/react/solid'
 import HomeModal from "./homeModal";
-import { getPalabras } from "../../services/palabras";
+import { deletePalabraStorage, getPalabras } from "../../services/palabras";
 
 
 const Home = () => {
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(0);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [palabra, setPalabra] = useState(null);
   const [data, setData] = useState(null);
+  
 
   useEffect(()=>{
     async function getData (){
       const palabras = await getPalabras()
       setData(palabras)
-      console.log(palabras)
     }
     getData()
 }, [show]);
@@ -44,7 +45,8 @@ const Home = () => {
                <th scope="row">{index + 1}</th>
                <td>{palabra.palabra}</td>
                <td>{palabra.traduccion}</td>
-               <td><PencilAltIcon className="icons" onClick={()=>{handleShow(); setPalabra(palabra)}}/> <TrashIcon className="icons text-danger" /></td>
+               <td><PencilAltIcon className="icons" onClick={()=>{handleShow(); setPalabra(palabra)}}/> </td>
+               <td><TrashIcon className="icons text-danger" onClick={()=>{ deletePalabraStorage(palabra) }}/> </td>
              </tr>)
             })}
           </tbody>
@@ -52,7 +54,7 @@ const Home = () => {
       </div>
     </div>
 
-    <HomeModal palabra={palabra} handleClose={handleClose} show={show}/>
+    <HomeModal palabra={palabra} data={data} handleClose={handleClose} show={show}/>
   </>)
 }
 
