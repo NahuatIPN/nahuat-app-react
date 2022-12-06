@@ -2,7 +2,7 @@
   "name": "nahuat-app-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://macrolions.github.io/nahuat-app-react/",
+  "homepage": "http://macrolions.github.io/nahuat-app-react/",
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@testing-library/jest-dom": "^5.16.4",
