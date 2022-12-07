@@ -83,7 +83,7 @@ const HomeModal = ({ palabra, data, handleClose, show }) => {
     }
 
     const validatorOnlyletter = (e) => {
-        const re = /^[A-Z\s]+$/i;
+        const re = /^[a-zA-ZÀ-ÿ\u00f1\u00d1_\s]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1_\s]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1_\s]+$/
         if (re.test(e)) {
             return true
         }
