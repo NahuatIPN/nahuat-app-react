@@ -16,7 +16,7 @@ const Login = ({ history }) => {
         try {
             await signInWithEmailAndPassword(auth, email, password).then(() => {
                 swal({ title: 'Bienvenido', icon: 'success', button: 'Aceptar', closeOnClickOutside: false, closeOnEsc: false })
-                    .then(() => { history.push("/home") });
+                    .then(() => { history.push("/nahuat-app-react/home") });
             })
         }
         catch (error) {
@@ -28,7 +28,7 @@ const Login = ({ history }) => {
 
     useEffect(() => {
         if (currentUser) {
-            history.push("/home")
+            history.push("/nahuat-app-react/home")
         }
     }, [history, currentUser])
 
