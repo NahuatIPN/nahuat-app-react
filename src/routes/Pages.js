@@ -3,7 +3,7 @@ import Login from "../app/components/Login";
 
 export const privatePageList = [
     {
-        path: '/home',
+        path: 'nahuat-app-react/home',
         name:'Home',
         component: Home
     }
@@ -11,7 +11,7 @@ export const privatePageList = [
 
 export const publicPageList = [
     {
-        path: '/',
+        path: '/nahuat-app-react',
         name:'Login',
         component: Login
     }
