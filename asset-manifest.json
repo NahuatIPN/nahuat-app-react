@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/nahuat-app-react/static/css/main.b264186e.css",
-    "main.js": "/nahuat-app-react/static/js/main.2f398f03.js",
+    "main.js": "/nahuat-app-react/static/js/main.ae0deb3a.js",
     "static/media/Logo.png": "/nahuat-app-react/static/media/Logo.ad0117b3ba1e78c10595.png",
     "index.html": "/nahuat-app-react/index.html",
     "main.b264186e.css.map": "/nahuat-app-react/static/css/main.b264186e.css.map",
-    "main.2f398f03.js.map": "/nahuat-app-react/static/js/main.2f398f03.js.map"
+    "main.ae0deb3a.js.map": "/nahuat-app-react/static/js/main.ae0deb3a.js.map"
   },
   "entrypoints": [
     "static/css/main.b264186e.css",
-    "static/js/main.2f398f03.js"
+    "static/js/main.ae0deb3a.js"
   ]
 }
